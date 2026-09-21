@@ -527,7 +527,7 @@ function downloadCoupon(couponId, filename) {
   const originalText = btn.innerText;
 
   // Cambiar estado visual del botón
-  btn.innerText = "Generando imagen... ⏳";
+  btn.innerText = "Generando imagen...";
   btn.disabled = true;
 
   // Verificar si la librería html2canvas está cargada
@@ -551,7 +551,7 @@ function downloadCoupon(couponId, filename) {
     link.click(); // Iniciar descarga
 
     // Éxito
-    btn.innerText = "¡Guardado con éxito! ✓";
+    btn.innerText = "¡Guardado con éxito!";
     setTimeout(() => {
       btn.innerText = originalText;
       btn.disabled = false;
