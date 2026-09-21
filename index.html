@@ -1,0 +1,599 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#fdf6f9" />
+  <meta name="description" content="Un regalo especial de cumpleaños para Valeria ✨" />
+  <title>¡Feliz Cumpleaños, Valeria! 🎂</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Reproductor de música flotante -->
+  <div id="music-player" class="music-player">
+    <button id="music-btn" class="music-btn" aria-pressed="false" title="Reproducir música">
+      <span class="vinyl-icon" id="vinyl-icon">🎵</span>
+    </button>
+  </div>
+
+  <audio id="bg-audio" preload="auto" loop>
+    <source src="assets/music/canserbero_stupid_love_story.mp3" type="audio/mpeg" />
+  </audio>
+
+  <main>
+    <section class="hero-section" id="hero">
+
+      <!-- ══════════════════════════════════════════════
+           GLOBOS SVG — izquierda, más hacia el centro
+      ══════════════════════════════════════════════ -->
+      <div class="deco-balloons-left" aria-hidden="true">
+        <svg width="90" height="195" viewBox="0 0 90 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Globo rosa -->
+          <ellipse cx="22" cy="40" rx="18" ry="23" fill="#f4a0c0"/>
+          <ellipse cx="15" cy="28" rx="6" ry="8" fill="rgba(255,255,255,0.45)"/>
+          <polygon points="22,63 18,70 26,70" fill="#f4a0c0"/>
+          <!-- Globo lavanda -->
+          <ellipse cx="52" cy="29" rx="21" ry="26" fill="#c9b3e8"/>
+          <ellipse cx="43" cy="16" rx="7" ry="9" fill="rgba(255,255,255,0.42)"/>
+          <polygon points="52,55 48,62 56,62" fill="#c9b3e8"/>
+          <!-- Globo durazno -->
+          <ellipse cx="76" cy="44" rx="14" ry="18" fill="#f5c5a3"/>
+          <ellipse cx="70" cy="34" rx="4.5" ry="6" fill="rgba(255,255,255,0.38)"/>
+          <polygon points="76,62 73,68 79,68" fill="#f5c5a3"/>
+          <!-- Hilos -->
+          <path d="M22,70 Q25,95 30,120 Q35,152 45,192" stroke="#d0a8b8" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <path d="M52,62 Q51,88 48,118 Q46,152 45,192" stroke="#b0a0d8" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <path d="M76,68 Q70,92 62,118 Q54,152 45,192" stroke="#d8b898" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           GLOBOS SVG — derecha, más hacia el centro
+      ══════════════════════════════════════════════ -->
+      <div class="deco-balloons-right" aria-hidden="true">
+        <svg width="90" height="185" viewBox="0 0 90 185" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Globo menta -->
+          <ellipse cx="14" cy="42" rx="14" ry="18" fill="#a8d8c0"/>
+          <ellipse cx="8" cy="32" rx="4" ry="6" fill="rgba(255,255,255,0.4)"/>
+          <polygon points="14,60 11,66 17,66" fill="#a8d8c0"/>
+          <!-- Globo azul cielo -->
+          <ellipse cx="44" cy="28" rx="20" ry="25" fill="#aac8e8"/>
+          <ellipse cx="36" cy="16" rx="6" ry="8" fill="rgba(255,255,255,0.42)"/>
+          <polygon points="44,53 40,60 48,60" fill="#aac8e8"/>
+          <!-- Globo amarillo -->
+          <ellipse cx="72" cy="40" rx="16" ry="20" fill="#f9e4a0"/>
+          <ellipse cx="65" cy="29" rx="5" ry="7" fill="rgba(255,255,255,0.4)"/>
+          <polygon points="72,60 68,67 76,67" fill="#f9e4a0"/>
+          <!-- Hilos -->
+          <path d="M14,66 Q20,90 28,115 Q36,148 44,182" stroke="#90c8b0" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <path d="M44,60 Q44,85 44,112 Q44,148 44,182" stroke="#88a8c8" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <path d="M72,67 Q64,90 56,115 Q50,148 44,182" stroke="#d8c880" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           RAMOS DE FLORES SVG con pétalos reales
+           Flores: roja, amarilla, azul — contrastan con el fondo
+      ══════════════════════════════════════════════ -->
+
+      <!-- Ramo izquierda -->
+      <div class="deco-bouquet-left" aria-hidden="true">
+        <svg width="105" height="140" viewBox="0 0 105 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Tallos (verde oscuro visible) -->
+          <path d="M52 90 Q44 105 32 132" stroke="#2e7d26" stroke-width="3" stroke-linecap="round"/>
+          <path d="M52 90 Q52 106 52 132" stroke="#2e7d26" stroke-width="3" stroke-linecap="round"/>
+          <path d="M52 90 Q60 105 72 132" stroke="#2e7d26" stroke-width="3" stroke-linecap="round"/>
+          <!-- Hojas -->
+          <ellipse cx="40" cy="108" rx="12" ry="5" fill="#4aa840" transform="rotate(-38 40 108)"/>
+          <ellipse cx="64" cy="110" rx="12" ry="5" fill="#4aa840" transform="rotate(38 64 110)"/>
+          <!-- Lazo decorativo -->
+          <path d="M40 128 Q52 122 64 128" stroke="#f4a0c0" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+          <!-- FLOR ROJA (izquierda) — pétalos con grupo + translate -->
+          <g transform="translate(28, 58)">
+            <ellipse cx="0" cy="-14" rx="7" ry="11" fill="#e83050" opacity="0.95"/>
+            <ellipse cx="0" cy="-14" rx="7" ry="11" fill="#e83050" transform="rotate(60)" opacity="0.95"/>
+            <ellipse cx="0" cy="-14" rx="7" ry="11" fill="#d02040" transform="rotate(120)" opacity="0.9"/>
+            <ellipse cx="0" cy="-14" rx="7" ry="11" fill="#d02040" transform="rotate(180)" opacity="0.9"/>
+            <ellipse cx="0" cy="-14" rx="7" ry="11" fill="#e83050" transform="rotate(240)" opacity="0.95"/>
+            <ellipse cx="0" cy="-14" rx="7" ry="11" fill="#e83050" transform="rotate(300)" opacity="0.95"/>
+            <circle cx="0" cy="0" r="8" fill="#ffd040"/>
+            <circle cx="0" cy="0" r="4" fill="#e89000" opacity="0.85"/>
+          </g>
+
+          <!-- FLOR AMARILLA (centro, la más alta) -->
+          <g transform="translate(52, 36)">
+            <ellipse cx="0" cy="-15" rx="8" ry="13" fill="#ffd820" opacity="0.95"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="13" fill="#ffd820" transform="rotate(60)" opacity="0.95"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="13" fill="#f5c000" transform="rotate(120)" opacity="0.9"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="13" fill="#f5c000" transform="rotate(180)" opacity="0.9"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="13" fill="#ffd820" transform="rotate(240)" opacity="0.95"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="13" fill="#ffd820" transform="rotate(300)" opacity="0.95"/>
+            <circle cx="0" cy="0" r="9" fill="#ff8800"/>
+            <circle cx="0" cy="0" r="4.5" fill="#cc5000" opacity="0.8"/>
+          </g>
+
+          <!-- FLOR AZUL (derecha) -->
+          <g transform="translate(76, 54)">
+            <ellipse cx="0" cy="-13" rx="6.5" ry="10" fill="#3a80e0" opacity="0.95"/>
+            <ellipse cx="0" cy="-13" rx="6.5" ry="10" fill="#3a80e0" transform="rotate(60)" opacity="0.95"/>
+            <ellipse cx="0" cy="-13" rx="6.5" ry="10" fill="#2060c0" transform="rotate(120)" opacity="0.9"/>
+            <ellipse cx="0" cy="-13" rx="6.5" ry="10" fill="#2060c0" transform="rotate(180)" opacity="0.9"/>
+            <ellipse cx="0" cy="-13" rx="6.5" ry="10" fill="#3a80e0" transform="rotate(240)" opacity="0.95"/>
+            <ellipse cx="0" cy="-13" rx="6.5" ry="10" fill="#3a80e0" transform="rotate(300)" opacity="0.95"/>
+            <circle cx="0" cy="0" r="7.5" fill="#ffe870"/>
+            <circle cx="0" cy="0" r="3.5" fill="#e8c000" opacity="0.85"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Ramo derecha (espejo con colores distintos) -->
+      <div class="deco-bouquet-right" aria-hidden="true">
+        <svg width="105" height="140" viewBox="0 0 105 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Tallos -->
+          <path d="M52 90 Q44 105 32 132" stroke="#2e7d26" stroke-width="3" stroke-linecap="round"/>
+          <path d="M52 90 Q52 106 52 132" stroke="#2e7d26" stroke-width="3" stroke-linecap="round"/>
+          <path d="M52 90 Q60 105 72 132" stroke="#2e7d26" stroke-width="3" stroke-linecap="round"/>
+          <!-- Hojas -->
+          <ellipse cx="40" cy="108" rx="12" ry="5" fill="#4aa840" transform="rotate(-38 40 108)"/>
+          <ellipse cx="64" cy="110" rx="12" ry="5" fill="#4aa840" transform="rotate(38 64 110)"/>
+          <!-- Lazo -->
+          <path d="M40 128 Q52 122 64 128" stroke="#c9b3e8" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+          <!-- FLOR NARANJA (izquierda) -->
+          <g transform="translate(28, 60)">
+            <ellipse cx="0" cy="-13" rx="7" ry="11" fill="#ff8830" opacity="0.95"/>
+            <ellipse cx="0" cy="-13" rx="7" ry="11" fill="#ff8830" transform="rotate(60)" opacity="0.95"/>
+            <ellipse cx="0" cy="-13" rx="7" ry="11" fill="#e87020" transform="rotate(120)" opacity="0.9"/>
+            <ellipse cx="0" cy="-13" rx="7" ry="11" fill="#e87020" transform="rotate(180)" opacity="0.9"/>
+            <ellipse cx="0" cy="-13" rx="7" ry="11" fill="#ff8830" transform="rotate(240)" opacity="0.95"/>
+            <ellipse cx="0" cy="-13" rx="7" ry="11" fill="#ff8830" transform="rotate(300)" opacity="0.95"/>
+            <circle cx="0" cy="0" r="8" fill="#fff080"/>
+            <circle cx="0" cy="0" r="3.5" fill="#d8b000" opacity="0.85"/>
+          </g>
+
+          <!-- FLOR ROSA FUCSIA (centro) -->
+          <g transform="translate(52, 36)">
+            <ellipse cx="0" cy="-15" rx="8" ry="12" fill="#e040a0" opacity="0.95"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="12" fill="#e040a0" transform="rotate(60)" opacity="0.95"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="12" fill="#c82888" transform="rotate(120)" opacity="0.9"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="12" fill="#c82888" transform="rotate(180)" opacity="0.9"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="12" fill="#e040a0" transform="rotate(240)" opacity="0.95"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="12" fill="#e040a0" transform="rotate(300)" opacity="0.95"/>
+            <circle cx="0" cy="0" r="9" fill="#ffd860"/>
+            <circle cx="0" cy="0" r="4.5" fill="#e8a000" opacity="0.8"/>
+          </g>
+
+          <!-- FLOR VIOLETA (derecha) -->
+          <g transform="translate(76, 56)">
+            <ellipse cx="0" cy="-12" rx="6" ry="10" fill="#8040d0" opacity="0.95"/>
+            <ellipse cx="0" cy="-12" rx="6" ry="10" fill="#8040d0" transform="rotate(60)" opacity="0.95"/>
+            <ellipse cx="0" cy="-12" rx="6" ry="10" fill="#6020b0" transform="rotate(120)" opacity="0.9"/>
+            <ellipse cx="0" cy="-12" rx="6" ry="10" fill="#6020b0" transform="rotate(180)" opacity="0.9"/>
+            <ellipse cx="0" cy="-12" rx="6" ry="10" fill="#8040d0" transform="rotate(240)" opacity="0.95"/>
+            <ellipse cx="0" cy="-12" rx="6" ry="10" fill="#8040d0" transform="rotate(300)" opacity="0.95"/>
+            <circle cx="0" cy="0" r="7" fill="#fff5a0"/>
+            <circle cx="0" cy="0" r="3" fill="#d8c000" opacity="0.8"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           BRILLANTINA / SPARKLES — partículas de luz
+      ══════════════════════════════════════════════ -->
+      <div class="sparkle-field" aria-hidden="true">
+        <span class="sparkle sp-1">✦</span>
+        <span class="sparkle sp-2">✦</span>
+        <span class="sparkle sp-3">✦</span>
+        <span class="sparkle sp-4">✦</span>
+        <span class="sparkle sp-5">✦</span>
+        <span class="sparkle sp-6">✦</span>
+        <span class="sparkle sp-7">✦</span>
+        <span class="sparkle sp-8">✦</span>
+        <span class="sparkle sp-9">·</span>
+        <span class="sparkle sp-10">·</span>
+        <span class="sparkle sp-11">·</span>
+      </div>
+
+      <!-- Texto hero -->
+      <div class="hero-text">
+        <h1 class="main-title">¡Feliz<br/>Cumpleaños,<br/>Valeria!</h1>
+        <p class="main-subtitle">Para mi mejor amiga</p>
+      </div>
+
+      <!-- PASTEL INTERACTIVO — 3 pisos -->
+      <div class="cake-wrapper" id="cake-wrapper" role="button" tabindex="0"
+           aria-label="Toca la vela para pedir un deseo" title="¡Apaga la vela!">
+
+        <div class="cake" id="cake">
+
+          <!-- Vela en flujo normal, conectada al pastel -->
+          <div class="candle-wrapper" id="candle-wrapper">
+            <div class="candle-body">
+              <div class="flame-container" id="flame-container">
+                <div class="flame-outer" id="flame-outer">
+                  <div class="flame-inner"></div>
+                  <div class="flame-core"></div>
+                </div>
+                <div class="flame-glow" id="flame-glow"></div>
+              </div>
+              <div class="smoke-container" id="smoke-container" aria-hidden="true">
+                <div class="smoke smoke-1"></div>
+                <div class="smoke smoke-2"></div>
+                <div class="smoke smoke-3"></div>
+              </div>
+              <div class="candle-shaft"></div>
+              <div class="candle-base-ring"></div>
+            </div>
+          </div>
+
+          <!-- Piso 1 (top) -->
+          <div class="cake-tier cake-tier-1">
+            <div class="tier-frosting tier-frosting-1"></div>
+            <div class="tier-body tier-body-1">
+              <span class="tier-deco">✦</span>
+              <span class="tier-deco">✦</span>
+            </div>
+          </div>
+
+          <!-- Piso 2 (medio) -->
+          <div class="cake-tier cake-tier-2">
+            <div class="tier-frosting tier-frosting-2"></div>
+            <div class="tier-body tier-body-2">
+              <span class="tier-deco">✦</span>
+              <span class="tier-deco tier-deco-heart">♡</span>
+              <span class="tier-deco">✦</span>
+            </div>
+          </div>
+
+          <!-- Piso 3 (bottom) -->
+          <div class="cake-tier cake-tier-3">
+            <div class="tier-frosting tier-frosting-3"></div>
+            <div class="tier-body tier-body-3">
+              <span class="tier-deco">✦</span>
+              <span class="tier-deco tier-deco-heart">♡</span>
+              <span class="tier-deco">✦</span>
+            </div>
+          </div>
+
+          <div class="cake-plate"></div>
+        </div>
+
+        <p class="cta-text" id="cta-text">Pide un deseo y apaga la vela ✨</p>
+        <p class="scroll-hint" id="scroll-hint" aria-hidden="true">Desliza hacia abajo ↓</p>
+
+      </div>
+
+    </section>
+
+    <!-- Contenido desbloqueado -->
+    <div class="locked-content" id="locked-content" aria-hidden="true">
+
+      <div class="section-divider" aria-hidden="true">· · · ✦ · · ·</div>
+
+      <section class="message-section">
+        <div class="message-card">
+          <h2 class="section-title">Un mensaje para ti 💌</h2>
+          <p class="message-text">
+            Feliz cumpleañossss, te quiero mucho!!!!
+          </p>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════
+           SPRINT 2 — GALERÍA DE VALERIA
+      ══════════════════════════════════════════ -->
+      <section id="valeria-gallery" class="gallery-container">
+
+        <div class="gallery-intro">
+          <span class="aesthetic-tag">✦ Recuerdos</span>
+          <h2 class="section-title gallery-title">Valeria ✨</h2>
+        </div>
+
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="valeria-carousel">
+
+            <div class="photo-entry" style="--i:1">
+              <div class="photo-frame polaroid-style">
+                <img src="assets/images/Foto1.jpeg" alt="Valeria" loading="lazy" class="zoomable">
+              </div>
+            </div>
+
+            <div class="photo-entry" style="--i:2">
+              <div class="photo-frame polaroid-style">
+                <img src="assets/images/Foto2.jpeg" alt="Valeria" loading="lazy" class="zoomable">
+              </div>
+            </div>
+
+            <div class="photo-entry" style="--i:3">
+              <div class="photo-frame polaroid-style">
+                <img src="assets/images/Foto3.jpeg" alt="Valeria" loading="lazy" class="zoomable">
+              </div>
+            </div>
+
+            <div class="photo-entry" style="--i:4">
+              <div class="photo-frame polaroid-style">
+                <img src="assets/images/Foto4.jpeg" alt="Valeria" loading="lazy" class="zoomable">
+              </div>
+            </div>
+
+            <div class="photo-entry" style="--i:5">
+              <div class="photo-frame polaroid-style">
+                <img src="assets/images/Foto5.jpeg" alt="Valeria" loading="lazy" class="zoomable">
+              </div>
+            </div>
+
+          </div>
+          
+          <!-- Indicadores del carrusel -->
+          <div class="carousel-dots" id="carousel-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+            <span class="dot" data-index="4"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════
+           SPRINT 2 — RINCÓN DE YAYO 🐾
+      ══════════════════════════════════════════ -->
+      <section id="yayo-corner" class="yayo-container">
+        <div class="aesthetic-separator">
+          <span>✦ ✦ ✦</span>
+        </div>
+        <div class="yayo-duo-grid">
+          <div class="yayo-frame polaroid-style" style="--i:6">
+            <img src="assets/images/FotoPerro1.jpeg" alt="Yayo" loading="lazy" class="zoomable">
+          </div>
+          <div class="yayo-frame polaroid-style" style="--i:7">
+            <img src="assets/images/FotoPerro2.jpeg" alt="Yayo" loading="lazy" class="zoomable">
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECCIÓN 3: CARRUSEL DE CARTAS EXTENSAS ================= -->
+      <section id="letters-section" class="letters-container">
+        
+        <!-- Encabezado de la sección -->
+        <div class="letters-header">
+          <span class="aesthetic-tag">✦ Para leer con calma</span>
+          <h2 class="section-title">Palabras para ti ✧</h2>
+        </div>
+
+        <!-- Contenedor del Carrusel -->
+        <div class="letters-carousel-wrapper">
+          
+          <!-- Botón Anterior -->
+          <button class="letters-nav prev" id="letter-prev" aria-label="Carta anterior">&#8249;</button>
+
+          <!-- Pista deslizable con CSS Snap -->
+          <div class="letters-slider" id="letters-slider">
+            
+            <!-- CARTA 1 -->
+            <article class="letter-card" data-index="1">
+              <div class="letter-inner">
+                <div class="letter-ornament">☾ ✦ ❀</div>
+                <h3 class="letter-title">Feliz Cumpleaños</h3>
+                <div class="letter-body">
+                  <p>
+                    Feliz cumpleeeee, feliz cumple we, espero que puedas pasarlo bombafantastick, quiero decirte lo mucho que te aprecio y feliz
+                    por ti por que cumples un año mas de vida (o un año menos) jksajksjkjaks, que sepas que te aprecio apesar de que siempre que puedo
+                    te lo recuerdo en tu cumple deberia ser mas evidente esto.
+                  </p>
+                  <p>
+                    Quiero que la pases bien y feliz, espero que comas mucho y subas 3kl por que barriga llena y corazon contento, tqm feliz cumpleeeee
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- CARTA 2 -->
+            <article class="letter-card" data-index="2">
+              <div class="letter-inner">
+                <div class="letter-ornament">❀ ✦ ❀</div>
+                <h3 class="letter-title">Las cosas que admiro de ti</h3>
+                <div class="letter-body">
+                  <p>
+                    Eres alguien que apesar de que no pueda, sigue intendando y no se rinde, eso es algo que admiro de ti
+                    tambien admiro que te cuestiones todo es algo que muy pocas personas tienen y es mas una habilidad
+                    increible que otra cosa, apesar de que en el fondo aveces seas negativa, siempre transmites una vibra de 
+                    que todo estara bien, hay algo en tu tono de voz o en la forma en la que dices las cosas que hace que se vuelva real y eso 
+                    es algo que admirar, admiro que siempre estas para escuchar y siempre prestes un hombro para los demas, siempre estas alli y eso
+                    es algo que poca gente posee, eres alguien que siempre tiene una respuesta para todo y una de las personas mas inteligentes que
+                    conozco, admiro tambien que seas tan talentosa dibujando y en general plasmando tus sentimientos en poemas.
+                  </p>
+                  <p>
+                    Por todo eso y mas te admiro muchoteee, ojala nunca cambies TQM
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- CARTA 3 -->
+            <article class="letter-card" data-index="3">
+              <div class="letter-inner">
+                <div class="letter-ornament">✧ ✦ ✧</div>
+                <h3 class="letter-title">Tenkio por existir</h3>
+                <div class="letter-body">
+                  <p>
+                    Gracias por nacer we, se que siempre te lo repito pero gracias por existir y estar viva, eres una de las personas mas 
+                    increibles que conozco, aparte de mi mejor amiga tambien eres una persona que sigue adelante, gracias por permitirme ser
+                    tu amigo.
+                  </p>
+                  <p>
+                    Me acuerdo que cuando nos conocimos nos volvimos amigos al instante, en todo es gracias a que confiaste en mi apesar de todo
+                    lo malo que te paso seguiste confiando en la personas y eso llevo a que pudiera conocerte y no me arrepiento, TQM
+                  </p>
+                </div>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- Botón Siguiente -->
+          <button class="letters-nav next" id="letter-next" aria-label="Siguiente carta">&#8250;</button>
+        </div>
+
+        <!-- Puntos indicadores inferiores (Dots) -->
+        <div class="letters-dots" id="letters-dots">
+          <span class="letter-dot active" data-slide="0"></span>
+          <span class="letter-dot" data-slide="1"></span>
+          <span class="letter-dot" data-slide="2"></span>
+        </div>
+
+        <!-- Indicación sutil de swipe para celular -->
+        <p class="swipe-hint">Desliza hacia los lados para seguir leyendo ⟷</p>
+
+      </section>
+
+      <!-- ================= SECCIÓN 4: TALONARIO DE CUPONES ================= -->
+      <section id="coupons-section" class="coupons-container">
+        
+        <div class="coupons-header">
+          <span class="aesthetic-tag">✦ Regalo interactivo</span>
+          <h2 class="section-title">Talonario de Cupones ✧</h2>
+          <p class="coupons-subtitle">Puedes guardar cada cupón en tu celular y canjearlo cuando quieras.</p>
+        </div>
+
+        <div class="coupons-grid">
+          
+          <!-- Cupón 1 -->
+          <div class="coupon-wrapper">
+            <div class="coupon-box" id="coupon-1">
+              <div class="coupon-cutout left"></div>
+              <div class="coupon-cutout right"></div>
+              <h3 class="coupon-title">Noche de Películas o Series</h3>
+              <p class="coupon-desc">Tú eliges qué película o serie veamos y la tenemos que terminar sí o sí.</p>
+              <div class="coupon-footer">
+                <span>Fecha de vencimiento 2030 ✧</span>
+              </div>
+            </div>
+            <button class="download-btn" onclick="downloadCoupon('coupon-1', 'Cupon-01-Pelis')">Guardar en mi cel</button>
+          </div>
+
+          <!-- Cupón 2 -->
+          <div class="coupon-wrapper">
+            <div class="coupon-box" id="coupon-2">
+              <div class="coupon-cutout left"></div>
+              <div class="coupon-cutout right"></div>
+              <h3 class="coupon-title">Pase Libre de Quejas</h3>
+              <p class="coupon-desc">Te puedes quejar ilimitadamente sobre lo que sea sin que yo debata o opine algo que esté en contra de tus quejas y te voy a escuchar ilimitadamente hasta que termines de quejarte.</p>
+              <div class="coupon-footer">
+                <span>Fecha de vencimiento 2030 ✧</span>
+              </div>
+            </div>
+            <button class="download-btn" onclick="downloadCoupon('coupon-2', 'Cupon-02-Quejas')">Guardar en mi cel</button>
+          </div>
+
+          <!-- Cupón 3 -->
+          <div class="coupon-wrapper">
+            <div class="coupon-box" id="coupon-3">
+              <div class="coupon-cutout left"></div>
+              <div class="coupon-cutout right"></div>
+              <h3 class="coupon-title">Comida a Domicilio Pagada</h3>
+              <p class="coupon-desc">Tu antojo favorito directo a tu puerta pagada por mí sin ningún costo para ti.</p>
+              <div class="coupon-footer">
+                <span>Fecha de vencimiento 2030 ✧</span>
+              </div>
+            </div>
+            <button class="download-btn" onclick="downloadCoupon('coupon-3', 'Cupon-03-Comida')">Guardar en mi cel</button>
+          </div>
+
+          <!-- Cupón 4 -->
+          <div class="coupon-wrapper">
+            <div class="coupon-box" id="coupon-4">
+              <div class="coupon-cutout left"></div>
+              <div class="coupon-cutout right"></div>
+              <h3 class="coupon-title">Sesión de Juegos</h3>
+              <p class="coupon-desc">Tú escoges qué juego jugamos el tiempo que tú quieras sin que yo objete nada.</p>
+              <div class="coupon-footer">
+                <span>Fecha de vencimiento 2030 ✧</span>
+              </div>
+            </div>
+            <button class="download-btn" onclick="downloadCoupon('coupon-4', 'Cupon-04-Juegos')">Guardar en mi cel</button>
+          </div>
+
+          <!-- Cupón 5 -->
+          <div class="coupon-wrapper">
+            <div class="coupon-box" id="coupon-5">
+              <div class="coupon-cutout left"></div>
+              <div class="coupon-cutout right"></div>
+              <h3 class="coupon-title">Dueña de mi Foto de Perfil</h3>
+              <p class="coupon-desc">Tú eliges foto o estado que pondré en mi WhatsApp o Instagram durante 24 horas sin que yo pueda decir que no.</p>
+              <div class="coupon-footer">
+                <span>Fecha de vencimiento 2030 ✧</span>
+              </div>
+            </div>
+            <button class="download-btn" onclick="downloadCoupon('coupon-5', 'Cupon-05-FotoPerfil')">Guardar en mi cel</button>
+          </div>
+
+          <!-- Cupón 6 -->
+          <div class="coupon-wrapper">
+            <div class="coupon-box" id="coupon-6">
+              <div class="coupon-cutout left"></div>
+              <div class="coupon-cutout right"></div>
+              <h3 class="coupon-title">Comodín: Pídeme lo que sea</h3>
+              <p class="coupon-desc">Válido para cualquier favor o petición que quieras darme o que quieras cobrar en el momento que sea. Me puedes pedir cualquier cosa.</p>
+              <div class="coupon-footer">
+                <span>Fecha de vencimiento 2030 ✧</span>
+              </div>
+            </div>
+            <button class="download-btn" onclick="downloadCoupon('coupon-6', 'Cupon-06-Comodin')">Guardar en mi cel</button>
+          </div>
+
+          <!-- Cupón 7 (Antes era el 8) -->
+          <div class="coupon-wrapper">
+            <div class="coupon-box" id="coupon-8">
+              <div class="coupon-cutout left"></div>
+              <div class="coupon-cutout right"></div>
+              <h3 class="coupon-title">Ganar una Discusión</h3>
+              <p class="coupon-desc">Válido para dar por cerrada cualquier discusión o debate y yo te voy a dar la razón automáticamente sea la discusión o el debate que sea.</p>
+              <div class="coupon-footer">
+                <span>Fecha de vencimiento 2030 ✧</span>
+              </div>
+            </div>
+            <button class="download-btn" onclick="downloadCoupon('coupon-8', 'Cupon-08-Razon')">Guardar en mi cel</button>
+          </div>
+
+        </div>
+
+        <!-- Pie de página final -->
+        <footer class="final-footer">
+          <p class="footer-msg">Hecho para Valeria</p>
+          <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Volver arriba ↑</button>
+        </footer>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ================= DEPENDENCIA EXTERNA (Para cupones) ================= -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <!-- ══════════════════════════════════════════
+       LIGHTBOX MODAL GLOBAL (Sprint 2)
+  ══════════════════════════════════════════ -->
+  <div id="lightbox" class="lightbox-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar visor">&#x2715;</button>
+    <div class="lightbox-content">
+      <p id="lightbox-caption" class="lightbox-title"></p>
+      <img id="lightbox-img" src="" alt="Ampliación de foto">
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
