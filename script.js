@@ -566,3 +566,193 @@ function downloadCoupon(couponId, filename) {
     }, 3000);
   });
 }
+
+/* ════════════════════════════════════════════════════════════
+   REGALO INTERACTIVO — ROBUX
+   ════════════════════════════════════════════════════════════ */
+(function initGift() {
+  const wrapper   = document.getElementById('gift-box-wrapper');
+  const lid       = document.getElementById('gift-lid');
+  const sparkles  = document.getElementById('gift-sparkles');
+  const reveal    = document.getElementById('gift-reveal');
+  const hintText  = document.getElementById('gift-hint');
+  const dots      = [
+    document.getElementById('tap-dot-1'),
+    document.getElementById('tap-dot-2'),
+    document.getElementById('tap-dot-3')
+  ];
+
+  if (!wrapper) return;
+
+  let tapCount = 0;
+  let opened   = false;
+
+  // Sonido de "pop/maracas" usando la Web Audio API (sin archivos externos)
+  function playTapSound(final) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      if (final) {
+        // Sonido de "apertura" más festivo
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(400, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.15);
+        osc.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.3);
+        gain.gain.setValueAtTime(0.4, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.4);
+
+        // Nota extra festiva
+        setTimeout(() => {
+          const ctx2 = new (window.AudioContext || window.webkitAudioContext)();
+          const o2 = ctx2.createOscillator();
+          const g2 = ctx2.createGain();
+          o2.connect(g2); g2.connect(ctx2.destination);
+          o2.type = 'sine';
+          o2.frequency.setValueAtTime(600, ctx2.currentTime);
+          o2.frequency.exponentialRampToValueAtTime(1200, ctx2.currentTime + 0.2);
+          g2.gain.setValueAtTime(0.3, ctx2.currentTime);
+          g2.gain.exponentialRampToValueAtTime(0.001, ctx2.currentTime + 0.4);
+          o2.start(ctx2.currentTime);
+          o2.stop(ctx2.currentTime + 0.4);
+        }, 150);
+      } else {
+        // Golpe suave
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(300, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.1);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.15);
+      }
+    } catch (e) { /* silencioso si el navegador no lo soporta */ }
+  }
+
+  // Confeti al abrir
+  function launchGiftConfetti() {
+    if (typeof confetti === 'undefined') return;
+
+    // Ráfaga inicial fuerte
+    confetti({
+      particleCount: 120,
+      spread: 90,
+      origin: { y: 0.75 },
+      colors: ['#e83a78', '#f9c0d8', '#ffd700', '#00B06F', '#c9b3e8', '#fff']
+    });
+
+    // Ráfaga izquierda
+    setTimeout(() => confetti({
+      particleCount: 60,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0, y: 0.7 },
+      colors: ['#e83a78', '#ffd700', '#00B06F']
+    }), 300);
+
+    // Ráfaga derecha
+    setTimeout(() => confetti({
+      particleCount: 60,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1, y: 0.7 },
+      colors: ['#e83a78', '#ffd700', '#00B06F']
+    }), 500);
+  }
+
+  function openGift() {
+    opened = true;
+    wrapper.style.pointerEvents = 'none';
+
+    // Activar sparkles
+    sparkles.classList.add('active');
+
+    // Abrir tapa
+    lid.classList.add('open');
+
+    // Sonido de apertura
+    playTapSound(true);
+
+    // Confeti
+    launchGiftConfetti();
+
+    // Cambiar texto
+    hintText.textContent = 'Sorpresa';
+
+    // Mostrar código Robux con pequeño delay
+    setTimeout(() => {
+      reveal.classList.add('visible');
+      reveal.removeAttribute('aria-hidden');
+    }, 600);
+  }
+
+  wrapper.addEventListener('click', () => {
+    if (opened) return;
+
+    // Salto interactivo en cada golpe
+    wrapper.style.animation = 'none';
+    void wrapper.offsetWidth;
+    wrapper.classList.remove('jumping');
+    void wrapper.offsetWidth;
+    wrapper.classList.add('jumping');
+
+    wrapper.addEventListener('animationend', () => {
+      wrapper.classList.remove('jumping');
+      if (!opened) {
+        wrapper.style.animation = ''; // Reanudar wiggle idle
+      }
+    }, { once: true });
+
+    tapCount++;
+    playTapSound(false);
+
+    // Encender puntos
+    if (dots[tapCount - 1]) {
+      dots[tapCount - 1].classList.add('active');
+    }
+
+    // Actualizar hint
+    const remaining = 3 - tapCount;
+    if (remaining > 0) {
+      hintText.textContent = remaining === 2 ? 'Sigue tocando (2 mas)' : 'Una mas...';
+    }
+
+    if (tapCount >= 3) {
+      setTimeout(openGift, 200);
+    }
+  });
+
+  // touchstart sin preventDefault para evitar el error de consola
+  wrapper.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    wrapper.click();
+  }, { passive: false });
+})();
+
+/* Copiar código Robux al portapapeles */
+function copyRobuxCode() {
+  const code = document.getElementById('robux-code-text')?.innerText || '7GLXV-FPCZY-CLRZB';
+  const btn  = document.getElementById('copy-code-btn');
+
+  navigator.clipboard.writeText(code).then(() => {
+    if (btn) {
+      btn.classList.add('copied');
+      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+      }, 2000);
+    }
+  }).catch(() => {
+    // Fallback para navegadores que no soportan clipboard API
+    const range = document.createRange();
+    range.selectNode(document.getElementById('robux-code-text'));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+  });
+}
