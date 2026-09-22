@@ -695,16 +695,21 @@ function downloadCoupon(couponId, filename) {
     if (opened) return;
 
     // Salto interactivo en cada golpe
-    wrapper.style.animation = 'none';
-    void wrapper.offsetWidth;
+    // Primero limpiar el estilo inline y la clase, luego agregar en el siguiente frame
+    wrapper.style.animation = '';
     wrapper.classList.remove('jumping');
-    void wrapper.offsetWidth;
-    wrapper.classList.add('jumping');
+    // Forzar reflow sin inline 'none' para que la clase CSS tome efecto
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        wrapper.classList.add('jumping');
+      });
+    });
 
     wrapper.addEventListener('animationend', () => {
       wrapper.classList.remove('jumping');
       if (!opened) {
-        wrapper.style.animation = ''; // Reanudar wiggle idle
+        // Reanudar wiggle idle
+        wrapper.style.animation = 'giftIdle 1.8s ease-in-out infinite';
       }
     }, { once: true });
 
